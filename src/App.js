@@ -7,6 +7,7 @@ function App() {
   let blankCustomer = {"id": -1, "name": "", "email": "", "password": ""};
   const [customers, setCustomers] = useState([]);
   const [formObject, setformObject] = useState(blankCustomer);
+  let mode = formObject.id === -1 ? "Add" : "Update";
 
   useEffect(() => { getCustomers(); }, []);
 
@@ -58,6 +59,15 @@ function App() {
     rowSelectionHandler(isAlreadySelected ? null : customer);
   }
 
+  const handleInputChange = function (event) {
+    console.log("in handleInputChange()");
+    const name = event.target.name;
+    const value = event.target.value;
+    let newFormObject = {...formObject}
+    newFormObject[name] = value;
+    setformObject(newFormObject);
+  }
+
   return (
     <div className="App">
       <table className="customer-table">
@@ -84,19 +94,37 @@ function App() {
       <br />
 
       <table className="customer-table-editor">
-        <caption><b>Update</b></caption>
+        <caption><b>{mode}</b></caption>
           <tbody>
             <tr>
               <td>Name:</td>
-              <td><input type="text" placeholder="Some Person" value={formObject.name} /></td>
+              <td><input 
+                type="text" 
+                name="name"
+                placeholder="Some Person" 
+                onChange={ (e) => handleInputChange(e) }
+                value={formObject.name} 
+              /></td>
             </tr>
             <tr>
               <td>Email:</td>
-              <td><input type="email" placeholder="someone@email.com" value={formObject.email} /></td>
+              <td><input 
+                type="email"
+                name="email"
+                placeholder="someone@email.com" 
+                onChange={ (e) => handleInputChange(e) }
+                value={formObject.email} 
+              /></td>
             </tr>
             <tr>
               <td>Pass:</td>
-              <td><input type="text" placeholder="supersecurepassword" value={formObject.password} /></td>
+              <td><input 
+                type="text" 
+                name="password"
+                placeholder="supersecurepassword" 
+                onChange={ (e) => handleInputChange(e) }
+                value={formObject.password} 
+              /></td>
             </tr>
             <tr>
               <td colSpan="2">
