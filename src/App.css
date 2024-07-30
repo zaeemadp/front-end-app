@@ -52,6 +52,10 @@
     text-align: left;
   }
 
+  :hover {
+    cursor: default;
+  }
+  
   caption {
     text-align: left;
     font-size: 1.5em;
@@ -59,7 +63,6 @@
     margin-bottom: 10px;
     font-weight: bold;
     font-family: sans-serif;
-
   }
 
   th, td {
