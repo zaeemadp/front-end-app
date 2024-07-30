@@ -6,7 +6,7 @@ import { deleteById, get, getAll, post, put } from './memdb';
 function App() {
   let blankCustomer = {"id": -1, "name": "", "email": "", "password": ""};
   const [customers, setCustomers] = useState([]);
-  const [currentFormSelection, setCurrentFormSelection] = useState(blankCustomer);
+  const [formObject, setformObject] = useState(blankCustomer);
 
   useEffect(() => { getCustomers(); }, []);
 
@@ -15,8 +15,27 @@ function App() {
     setCustomers(getAll());
   }
 
+  function rowSelectionHandler(customer = null) {
+    for (let i = 1; i < customers.length + 1; i++) {
+      document.getElementsByTagName("tr")[i].style.fontWeight = "normal";
+    }
+    
+    if (customer !== null) {
+      document.getElementsByTagName("tr")[customers.indexOf(customer) + 1].style.fontWeight = "bold";
+    }
+  }
+
   function onDeleteClick() {
     console.log("in onDeleteClick()");
+
+    if (formObject.id === -1) {
+      return;
+    }
+
+    deleteById(formObject.id);
+    setformObject(blankCustomer);
+
+    rowSelectionHandler();
   }
   
   function onSaveClick() {
@@ -26,29 +45,17 @@ function App() {
   function onCancelClick() {
     console.log("in onCancelClick()");
     
-    setCurrentFormSelection(blankCustomer);
-    for (let i = 1; i < customers.length + 1; i++) {
-      document.getElementsByTagName("tr")[i].style.fontWeight = "normal";
-    }
+    setformObject(blankCustomer);
+    rowSelectionHandler();
   }
   
   const handleListClick = function (customer) {
     console.log("in handleListClick()");
 
-    const isAlreadySelected =
-      currentFormSelection.name === customer.name &&
-      currentFormSelection.email === customer.email &&
-      currentFormSelection.password === customer.password;
-    
-    setCurrentFormSelection(isAlreadySelected ? blankCustomer : customer);
+    const isAlreadySelected = formObject.id === customer.id;
 
-    for (let i = 1; i < customers.length + 1; i++) {
-      document.getElementsByTagName("tr")[i].style.fontWeight = "normal";
-    }
-  
-    if (!isAlreadySelected) {
-      document.getElementsByTagName("tr")[customers.indexOf(customer) + 1].style.fontWeight = "bold";
-    }
+    setformObject(isAlreadySelected ? blankCustomer : customer);
+    rowSelectionHandler(isAlreadySelected ? null : customer);
   }
 
   return (
@@ -81,15 +88,15 @@ function App() {
           <tbody>
             <tr>
               <td>Name:</td>
-              <td><input type="text" placeholder="Some Person" value={currentFormSelection.name} /></td>
+              <td><input type="text" placeholder="Some Person" value={formObject.name} /></td>
             </tr>
             <tr>
               <td>Email:</td>
-              <td><input type="email" placeholder="someone@email.com" value={currentFormSelection.email} /></td>
+              <td><input type="email" placeholder="someone@email.com" value={formObject.email} /></td>
             </tr>
             <tr>
               <td>Pass:</td>
-              <td><input type="text" placeholder="supersecurepassword" value={currentFormSelection.password} /></td>
+              <td><input type="text" placeholder="supersecurepassword" value={formObject.password} /></td>
             </tr>
             <tr>
               <td colSpan="2">
