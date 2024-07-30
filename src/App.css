@@ -109,6 +109,10 @@
     font-family: sans-serif;
   }
 
+  tbody tr td:first-child {
+    cursor: default;
+  }
+
   th, td {
       padding: 12px 15px;
       text-align: left;
