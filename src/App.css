@@ -36,3 +36,126 @@
     transform: rotate(360deg);
   }
 }
+
+.customer-table {
+  border-collapse: collapse;
+  width: 95%;
+  margin: 0 auto;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+  thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+  }
+
+  caption {
+    text-align: left;
+    font-size: 1.5em;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-family: sans-serif;
+
+  }
+
+  th, td {
+      padding: 12px 15px;
+      text-align: left;
+  }
+
+  tbody tr {
+    border-bottom: thin solid #dddddd;
+  }
+
+  tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+  }
+
+  tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+  }
+
+  tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+  }
+}
+
+.customer-table-editor {
+  border-collapse: collapse;
+  width: 95%;
+  display: inline-block;
+  grid-template-columns: auto auto;
+  margin: 0 auto;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); */
+
+  caption {
+    text-align: left;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-family: sans-serif;
+  }
+
+  th, td {
+      padding: 12px 15px;
+      text-align: left;
+  }
+
+  tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+  }
+
+  tbody tr:last-child td:last-child {
+    background-color: #ffffff;
+  }
+}
+
+.button {
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  outline: 0;
+  padding: 10px 25px;
+  text-align: center;
+  transform: translateY(0);
+  transition: transform 150ms, box-shadow 150ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button:hover {
+  box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+  transform: translateY(-2px);
+}
+
+@media (min-width: 768px) {
+  .button {
+    padding: 10px 30px;
+    margin: 0 10px;
+  }
+}
+
+.delete-button, .cancel-button {
+  background-color: #e64135;
+  border: 1px solid #e64135;
+}
+
+.save-button {
+  background-color: #009879;
+  border: 1px solid #009879;
+}
