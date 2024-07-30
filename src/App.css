@@ -109,7 +109,7 @@
     font-family: sans-serif;
   }
 
-  tbody tr td:first-child {
+  caption:hover, tbody tr td:first-child:hover {
     cursor: default;
   }
 
