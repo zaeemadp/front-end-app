@@ -26,7 +26,7 @@ function App() {
     }
   }
 
-  function onDeleteClick() {
+  let onDeleteClick = function () {
     console.log("in onDeleteClick()");
 
     if (formObject.id === -1) {
@@ -39,11 +39,20 @@ function App() {
     rowSelectionHandler();
   }
   
-  function onSaveClick() {
+  let onSaveClick = function () {
     console.log("in onSaveClick()");
+
+    if (formObject.id === -1) {
+      post(formObject);
+    } else {
+      put(formObject.id, formObject);
+    }
+
+    setformObject(blankCustomer);
+    rowSelectionHandler();
   }
   
-  function onCancelClick() {
+  let onCancelClick = function () {
     console.log("in onCancelClick()");
     
     setformObject(blankCustomer);
