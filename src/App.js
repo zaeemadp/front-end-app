@@ -1,28 +1,19 @@
 import './App.css';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { deleteById, get, getAll, post, put } from './memdb';
 
 function App() {
   let blankCustomer = {"id": -1, "name": "", "email": "", "password": ""};
+  const [customers, setCustomers] = useState([]);
   const [currentFormSelection, setCurrentFormSelection] = useState(blankCustomer);
 
-  var customers = [
-    {
-      name: "John Doe",
-      email: "JohnDoe@gmail.com",
-      password: "johnpassword"
-    },
-    {
-      name: "Zaeem Zahid",
-      email: "zaeemzahid@gmail.com",
-      password: "zaeempassword"
-    },
-    {
-      name: "Antoine Victor",
-      email: "antoinevictor@gmail.com",
-      password: "antoinepassword"
-    }
-  ];  
+  useEffect(() => { getCustomers(); }, []);
+
+  const getCustomers = function () {
+    console.log("in getCustomers()");
+    setCustomers(getAll());
+  }
 
   function onDeleteClick() {
     console.log("in onDeleteClick()");
@@ -34,6 +25,11 @@ function App() {
   
   function onCancelClick() {
     console.log("in onCancelClick()");
+    
+    setCurrentFormSelection(blankCustomer);
+    for (let i = 1; i < customers.length + 1; i++) {
+      document.getElementsByTagName("tr")[i].style.fontWeight = "normal";
+    }
   }
   
   const handleListClick = function (customer) {
