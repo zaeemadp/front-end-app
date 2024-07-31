@@ -3,6 +3,9 @@ import './App.css';
 import React, { useEffect, useState } from 'react';
 import { deleteById, get, getAll, post, put } from './memdb';
 
+import { CustomerAddUpdateForm } from './CustomerAddUpdateForm';
+import { CustomerList } from './CustomerList';
+
 function App() {
   let blankCustomer = {"id": -1, "name": "", "email": "", "password": ""};
   const [customers, setCustomers] = useState([]);
@@ -79,71 +82,22 @@ function App() {
 
   return (
     <div className="App">
-      <table className="customer-table">
-        <caption><b>Customer List</b></caption>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Password</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {customers.map((customer, index) => (
-            <tr key={index} onClick={() => handleListClick(customer)}>
-              <td>{customer.name}</td>
-              <td>{customer.email}</td>
-              <td>{customer.password}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <CustomerList 
+        customers={customers} 
+        handleListClick={handleListClick}
+      />
 
       <br />
 
-      <table className="customer-table-editor">
-        <caption><b>{mode}</b></caption>
-          <tbody>
-            <tr>
-              <td>Name:</td>
-              <td><input 
-                type="text" 
-                name="name"
-                placeholder="Some Person" 
-                onChange={ (e) => handleInputChange(e) }
-                value={formObject.name} 
-              /></td>
-            </tr>
-            <tr>
-              <td>Email:</td>
-              <td><input 
-                type="email"
-                name="email"
-                placeholder="someone@email.com" 
-                onChange={ (e) => handleInputChange(e) }
-                value={formObject.email} 
-              /></td>
-            </tr>
-            <tr>
-              <td>Pass:</td>
-              <td><input 
-                type="text" 
-                name="password"
-                placeholder="supersecurepassword" 
-                onChange={ (e) => handleInputChange(e) }
-                value={formObject.password} 
-              /></td>
-            </tr>
-            <tr>
-              <td colSpan="2">
-                <button onClick={onDeleteClick} className="button delete-button">Delete</button>
-                <button onClick={onSaveClick} className="button save-button">Save</button>
-                <button onClick={onCancelClick} className="button cancel-button">Cancel</button>
-              </td>
-            </tr>
-          </tbody>
-      </table>
+      <CustomerAddUpdateForm
+        mode={mode}
+        handleInputChange={handleInputChange}
+        formObject={formObject}
+        onDeleteClick={onDeleteClick}
+        onSaveClick={onSaveClick}
+        onCancelClick={onCancelClick}
+      />
+
     </div>
   );
 }
