@@ -20,12 +20,12 @@ function App() {
   }
 
   function rowSelectionHandler(customer = null) {
-    for (let i = 1; i < customers.length + 1; i++) {
+    for (let i = 1; i < document.getElementsByTagName("tr").length; i++) {
       document.getElementsByTagName("tr")[i].style.fontWeight = "normal";
     }
     
-    if (customer !== null) {
-      document.getElementsByTagName("tr")[customers.indexOf(customer) + 1].style.fontWeight = "bold";
+    if (customer) {
+      document.getElementsByTagName("tr")[customer.id % 10].style.fontWeight = "bold";
     }
   }
 

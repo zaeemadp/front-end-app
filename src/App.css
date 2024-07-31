@@ -42,7 +42,7 @@
   width: 95%;
   margin: 0 auto;
   font-size: 0.9em;
-  font-family: sans-serif;
+  font-family: "Poppins", sans-serif;
   min-width: 400px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 
@@ -62,7 +62,7 @@
     margin-top: 25px;
     margin-bottom: 10px;
     font-weight: bold;
-    font-family: sans-serif;
+    font-family: "Poppins", sans-serif;
   }
 
   th, td {
@@ -98,7 +98,7 @@
   grid-template-columns: auto auto;
   margin: 0 auto;
   font-size: 0.9em;
-  font-family: sans-serif;
+  font-family: "Poppins", sans-serif;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 
   caption {
@@ -106,7 +106,7 @@
     font-size: 1.5em;
     margin-bottom: 10px;
     margin-top: 10px;
-    font-family: sans-serif;
+    font-family: "Poppins", sans-serif;
   }
 
   caption:hover, tbody tr td:first-child:hover {
@@ -133,7 +133,7 @@
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-weight: 400;
   outline: none;
@@ -167,4 +167,51 @@
 .save-button {
   background-color: #009879;
   border: 1px solid #009879;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  margin-top: 15px;
+  gap: .5rem;
+  cursor: default;
+
+  .page-input {
+    width: fit-content;
+    padding: 5px;
+    border: 1px solid #009879;
+    border-radius: 5px;
+    text-align: center; 
+  }
+
+  button {
+    padding: 5px 10px;
+    border: 1px solid #009879;
+    border-radius: 30px;
+    background-color: #009879;
+    color: white;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #007b6e;
+  }
+
+  button:disabled {
+    background-color: #d3d3d3;
+    border-color: #d3d3d3;
+    color: #a9a9a9;
+    cursor: not-allowed;
+  }
+}
+
+.count-range {
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  margin-top: 15px;
+  gap: .5rem;
+  cursor: default;
 }
