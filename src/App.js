@@ -1,7 +1,7 @@
 import './App.css';
 
 import React, { useEffect, useState } from 'react';
-import { deleteById, get, getAll, post, put } from './memdb';
+import { deleteById, getAll, post, put } from './restdb';
 
 import { CustomerAddUpdateForm } from './CustomerAddUpdateForm';
 import { CustomerList } from './CustomerList';
@@ -9,14 +9,14 @@ import { CustomerList } from './CustomerList';
 function App() {
   let blankCustomer = {"id": -1, "name": "", "email": "", "password": ""};
   const [customers, setCustomers] = useState([]);
-  const [formObject, setformObject] = useState(blankCustomer);
+  const [formObject, setFormObject] = useState(blankCustomer);
   let mode = formObject.id === -1 ? "Add" : "Update";
 
-  useEffect(() => { getCustomers(); }, []);
+  useEffect(() => { getCustomers() }, [formObject]);
 
   const getCustomers = function () {
     console.log("in getCustomers()");
-    setCustomers(getAll());
+    getAll(setCustomers);
   }
 
   function rowSelectionHandler(customer = null) {
@@ -31,34 +31,34 @@ function App() {
 
   let onDeleteClick = function () {
     console.log("in onDeleteClick()");
+    let postOpCallback = () => { setFormObject(blankCustomer); }
 
-    if (formObject.id === -1) {
-      return;
-    }
-
-    deleteById(formObject.id);
-    setformObject(blankCustomer);
-
+    if (formObject.id >= 0) {
+      deleteById(formObject.id, postOpCallback);
+    } else {
+      setFormObject(blankCustomer);
+    } 
+        
     rowSelectionHandler();
   }
   
   let onSaveClick = function () {
     console.log("in onSaveClick()");
+    let postOpCallback = () => { setFormObject(blankCustomer); }
 
     if (formObject.id === -1) {
-      post(formObject);
+      post(formObject, postOpCallback);
     } else {
-      put(formObject.id, formObject);
+      put(formObject, postOpCallback);
     }
 
-    setformObject(blankCustomer);
     rowSelectionHandler();
   }
   
   let onCancelClick = function () {
     console.log("in onCancelClick()");
     
-    setformObject(blankCustomer);
+    setFormObject(blankCustomer);
     rowSelectionHandler();
   }
   
@@ -67,7 +67,7 @@ function App() {
 
     const isAlreadySelected = formObject.id === customer.id;
 
-    setformObject(isAlreadySelected ? blankCustomer : customer);
+    setFormObject(isAlreadySelected ? blankCustomer : customer);
     rowSelectionHandler(isAlreadySelected ? null : customer);
   }
 
@@ -77,7 +77,7 @@ function App() {
     const value = event.target.value;
     let newFormObject = {...formObject}
     newFormObject[name] = value;
-    setformObject(newFormObject);
+    setFormObject(newFormObject);
   }
 
   return (
