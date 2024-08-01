@@ -25,7 +25,8 @@ function App() {
     }
     
     if (customer) {
-      document.getElementsByTagName("tr")[customer.id % 10].style.fontWeight = "bold";
+      const index = customer.id % 10 === 0 ? 10 : customer.id % 10;
+      document.getElementsByTagName("tr")[index].style.fontWeight = "bold";
     }
   }
 

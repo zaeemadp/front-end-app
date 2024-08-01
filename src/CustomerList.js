@@ -4,19 +4,24 @@ import { Pagination } from './Pagination';
 
 export function CustomerList(parameters) {
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10;
+    const [itemsPerPage, setItemsPerPage] = useState(5);
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
 
+    const onItemsPerPageChange = (newItemsPerPage) => {
+        setItemsPerPage(newItemsPerPage);
+        setCurrentPage(1);
+    };
+
     const startIndex = (currentPage - 1) * itemsPerPage;
     const currentCustomers = parameters.customers.slice(startIndex, startIndex + itemsPerPage);
-    
+
     return (
         <div>
             <table className="customer-table">
-                <caption><b>Customer List</b></caption>
+                <caption><b>Zaeem Zahid Project - Customer List</b></caption>
                 
                 <thead>
                     <tr>
@@ -42,6 +47,7 @@ export function CustomerList(parameters) {
                 itemsPerPage={itemsPerPage}
                 currentPage={currentPage}
                 onPageChange={handlePageChange}
+                onItemsPerPageChange={onItemsPerPageChange}
             />
         </div>
     );

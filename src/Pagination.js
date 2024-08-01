@@ -8,6 +8,7 @@ export function Pagination(parameters) {
         itemsPerPage,
         currentPage,
         onPageChange,
+        onItemsPerPageChange
     } = parameters;
 
     const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -20,6 +21,15 @@ export function Pagination(parameters) {
     const handlePageChange = (event) => {
         const page = Number(event.target.value);
         setInputPage(page);
+    };
+
+    const handleSelectChange = (event) => {
+        const itemsPerPage = Number(event.target.value);
+        onItemsPerPageChange(itemsPerPage);
+
+        const newTotalPages = Math.ceil(totalItems / itemsPerPage);
+        const newCurrentPage = Math.min(currentPage, newTotalPages);
+        onPageChange(newCurrentPage);
     };
 
     const getShowingRange = () => {
@@ -87,6 +97,17 @@ export function Pagination(parameters) {
                 >
                     ❯❯
                 </button>
+
+                <span>Records Per Page</span>
+                <select
+                    className="select-items-per-page"
+                    onChange={handleSelectChange}
+                    value={itemsPerPage}
+                >
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                </select>
             </div>
 
             <span className="count-range">
