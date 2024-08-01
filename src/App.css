@@ -89,6 +89,7 @@
 
   tbody tr:hover {
     color: #009879;
+    background-color: #f8fff7e3;
     cursor: pointer;
   }
 }

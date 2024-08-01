@@ -25,7 +25,8 @@ function App() {
     }
     
     if (customer) {
-      const index = customer.id % 10 === 0 ? 10 : customer.id % 10;
+      const numRecords = document.getElementsByTagName("tr").length;
+      const index = customer.id % numRecords === 0 ? numRecords : customer.id % numRecords;
       document.getElementsByTagName("tr")[index].style.fontWeight = "bold";
     }
   }
